@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Movie Ticket Booking System</title>
+</head>
+<body>
+
+    <h1>Online Movie Ticket Booking System</h1>
+
+    <form action="#" method="post">
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <label for="full-name">Full Name:</label><br>
+            <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required><br><br>
+
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
+
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required><br><br>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Movie Details</legend>
+
+            <label for="movie">Select Movie:</label><br>
+            <select id="movie" name="movie" required>
+                <option value="">-- Select a Movie --</option>
+                <option value="avengers">Avengers: Secret Wars</option>
+                <option value="inception2">Inception 2</option>
+                <option value="interstellar2">Interstellar 2</option>
+                <option value="dune3">Dune: Part Three</option>
+                <option value="mission_impossible">Mission: Impossible 8</option>
+            </select><br><br>
+
+            <label for="date">Select Date:</label><br>
+            <input type="date" id="date" name="date" required><br><br>
+
+            <label for="showtime">Select Show Time:</label><br>
+            <select id="showtime" name="showtime" required>
+                <option value="">-- Select Show Time --</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="19:00">7:00 PM</option>
+                <option value="22:00">10:00 PM</option>
+            </select><br><br>
+
+            <label for="tickets">Number of Tickets:</label><br>
+            <input type="number" id="tickets" name="tickets" min="1" max="10" placeholder="Enter number of tickets" required><br><br>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Seat Type</legend>
+
+            <input type="radio" id="regular" name="seat_type" value="regular" required>
+            <label for="regular">Regular</label><br>
+
+            <input type="radio" id="vip" name="seat_type" value="vip">
+            <label for="vip">VIP</label><br>
+
+            <input type="radio" id="premium" name="seat_type" value="premium">
+            <label for="premium">Premium</label><br>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Food Options</legend>
+
+            <input type="checkbox" id="popcorn" name="food_options" value="popcorn">
+            <label for="popcorn">Popcorn</label><br>
+
+            <input type="checkbox" id="cold-drink" name="food_options" value="cold_drink">
+            <label for="cold-drink">Cold Drink</label><br>
+
+            <input type="checkbox" id="nachos" name="food_options" value="nachos">
+            <label for="nachos">Nachos</label><br>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Additional Information</legend>
+
+            <label for="special-request">Special Request:</label><br>
+            <textarea id="special-request" name="special_request" rows="5" cols="40" placeholder="Enter any special requests here..."></textarea><br><br>
+        </fieldset>
+
+        <br>
+
+        <input type="submit" value="Submit Booking">
+        &nbsp;
+        <input type="reset" value="Reset Form">
+
+    </form>
+
+</body>
+</html>

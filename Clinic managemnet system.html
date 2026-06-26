@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Clinic Management System</title>
+
+
+<style>
+
+/* ---------- GLOBAL ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    color:#333;
+    line-height:1.6;
+}
+
+section{
+    padding:50px 10%;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#087f8c;
+}
+
+
+/* ---------- HEADER NAVBAR ---------- */
+
+
+header{
+
+background:#087f8c;
+padding:15px;
+
+}
+
+
+nav{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+
+.logo{
+
+color:white;
+font-size:25px;
+
+}
+
+
+nav ul{
+
+display:flex;
+list-style:none;
+gap:25px;
+
+}
+
+
+nav ul li a{
+
+color:white;
+text-decoration:none;
+
+}
+
+
+
+
+
+/* ---------- HERO ---------- */
+
+
+.hero{
+
+height:500px;
+
+background:
+linear-gradient(
+rgba(0,0,0,.5),
+rgba(0,0,0,.5)
+),
+url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+color:white;
+
+}
+
+
+.hero h1{
+
+font-size:45px;
+
+}
+
+
+.hero p{
+
+font-size:20px;
+
+}
+
+
+button{
+
+background:#087f8c;
+color:white;
+padding:12px 25px;
+border:none;
+cursor:pointer;
+border-radius:5px;
+
+}
+
+
+
+
+
+/* ---------- GRID ---------- */
+
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+box-shadow:0 0 10px #ccc;
+
+border-radius:10px;
+
+text-align:center;
+
+}
+
+
+
+.card img{
+
+width:120px;
+height:120px;
+border-radius:50%;
+
+}
+
+
+
+
+
+/* ---------- ABOUT ---------- */
+
+
+.about{
+
+text-align:center;
+
+}
+
+
+
+
+
+/* ---------- DEPARTMENT ---------- */
+
+
+.department ul{
+
+display:flex;
+justify-content:center;
+gap:25px;
+list-style:none;
+
+flex-wrap:wrap;
+
+}
+
+
+.department li{
+
+background:#087f8c;
+color:white;
+padding:10px 20px;
+border-radius:20px;
+
+}
+
+
+
+
+
+/* ---------- FORM ---------- */
+
+
+form{
+
+max-width:600px;
+margin:auto;
+
+display:flex;
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+
+input,
+select,
+textarea{
+
+padding:12px;
+border:1px solid #ccc;
+
+}
+
+
+
+
+/* ---------- TABLE ---------- */
+
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+
+th,td{
+
+border:1px solid #ccc;
+
+padding:12px;
+
+text-align:center;
+
+}
+
+
+th{
+
+background:#087f8c;
+color:white;
+
+}
+
+
+
+
+
+/* ---------- CONTACT ---------- */
+
+
+#contact{
+
+text-align:center;
+
+}
+
+
+
+
+/* ---------- FOOTER ---------- */
+
+
+footer{
+
+background:#087f8c;
+
+color:white;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+
+
+
+/* ---------- RESPONSIVE ---------- */
+
+
+@media(max-width:768px){
+
+
+nav{
+
+flex-direction:column;
+
+}
+
+
+nav ul{
+
+flex-direction:column;
+
+text-align:center;
+
+margin-top:15px;
+
+}
+
+
+.hero h1{
+
+font-size:30px;
+
+}
+
+
+.hero{
+
+height:400px;
+
+}
+
+
+section{
+
+padding:40px 5%;
+
+}
+
+
+table{
+
+font-size:13px;
+
+}
+
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<!-- HEADER -->
+
+<header>
+
+<nav>
+
+<h2 class="logo">
+MediCare Clinic
+</h2>
+
+
+<ul>
+
+<li><a href="#">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#doctors">Doctors</a></li>
+<li><a href="#appointment">Appointment</a></li>
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div>
+
+<h1>
+Your Health Is Our Priority
+</h1>
+
+<p>
+Advanced healthcare with professional doctors
+</p>
+
+<button>
+Book Appointment
+</button>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!-- ABOUT -->
+
+<section id="about" class="about">
+
+
+<h2>
+About Our Clinic
+</h2>
+
+
+<p>
+MediCare Clinic provides modern medical treatment,
+experienced doctors and complete patient care.
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SERVICES -->
+
+
+<section id="services">
+
+
+<h2>
+Our Services
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+<h3>Emergency Care</h3>
+<p>24/7 emergency service</p>
+</div>
+
+
+<div class="card">
+<h3>Online Consultation</h3>
+<p>Meet doctors online</p>
+</div>
+
+
+<div class="card">
+<h3>Laboratory</h3>
+<p>Fast medical reports</p>
+</div>
+
+
+<div class="card">
+<h3>Health Checkup</h3>
+<p>Complete body checkup</p>
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- DOCTORS -->
+
+
+<section id="doctors">
+
+
+<h2>
+Our Doctors
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/120">
+
+<h3>
+Dr. John Smith
+</h3>
+
+<p>
+Cardiologist
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/120">
+
+<h3>
+Dr. Emily
+</h3>
+
+<p>
+Neurologist
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="https://via.placeholder.com/120">
+
+<h3>
+Dr. David
+</h3>
+
+<p>
+Surgeon
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- DEPARTMENT -->
+
+
+<section class="department">
+
+
+<h2>
+Departments
+</h2>
+
+
+<ul>
+
+<li>Cardiology</li>
+<li>Dental</li>
+<li>Orthopedic</li>
+<li>Pediatrics</li>
+<li>Radiology</li>
+
+</ul>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- APPOINTMENT -->
+
+
+<section id="appointment">
+
+
+<h2>
+Appointment Form
+</h2>
+
+
+<form>
+
+
+<input type="text" placeholder="Patient Name">
+
+
+<input type="email" placeholder="Email">
+
+
+<input type="number" placeholder="Phone">
+
+
+<select>
+
+<option>
+Select Department
+</option>
+
+<option>
+Cardiology
+</option>
+
+<option>
+Dental
+</option>
+
+</select>
+
+
+<textarea placeholder="Message"></textarea>
+
+
+<button>
+Submit
+</button>
+
+
+</form>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PATIENT RECORDS -->
+
+
+<section>
+
+
+<h2>
+Patient Records
+</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Disease</th>
+
+</tr>
+
+
+<tr>
+
+<td>101</td>
+<td>Ram</td>
+<td>25</td>
+<td>Fever</td>
+
+</tr>
+
+
+<tr>
+
+<td>102</td>
+<td>Sita</td>
+<td>30</td>
+<td>Cold</td>
+
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- TESTIMONIAL -->
+
+
+<section>
+
+
+<h2>
+Patient Testimonials
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<p>
+"Excellent service and friendly doctors."
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<p>
+"Best clinic management system."
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- CONTACT -->
+
+
+<section id="contact">
+
+
+<h2>
+Contact Us
+</h2>
+
+
+<p>
+Kathmandu, Nepal
+</p>
+
+<p>
+Phone: +977 9800000000
+</p>
+
+
+<p>
+Email: medicare@gmail.com
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer>
+
+<p>
+© 2026 MediCare Clinic All Rights Reserved
+</p>
+
+
+</footer>
+
+</body>
+</html>
