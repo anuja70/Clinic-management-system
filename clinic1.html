@@ -1,0 +1,2351 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =============================================
+       META & DOCUMENT SETUP
+       charset: ensures Nepali/Unicode text works
+       viewport: makes the site responsive on phones
+  ============================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MediCare Clinic – Modern Healthcare Management System" />
+  <title>MediCare Clinic | Your Health, Our Priority</title>
+  <style>
+    /* ==============================================
+   style.css – MediCare Clinic Management System
+   Author  : MediCare Dev Team
+   Version : 1.0
+   
+   TABLE OF CONTENTS
+   -----------------
+   0.  CSS Custom Properties (Variables)
+   1.  CSS Reset & Base Styles
+   2.  Reusable Utility Classes
+   3.  Typography Scale
+   4.  Buttons
+   5.  Header & Navigation
+   6.  Hero Section
+   7.  About Section
+   8.  Services Section (CSS Grid)
+   9.  Doctors Section (Flexbox)
+   10. Departments Section
+   11. Appointment Form
+   12. Patient Records Table
+   13. Testimonials Section
+   14. Contact Section
+   15. Footer
+   16. Media Queries – Responsive Design
+       - Mobile  : 320px – 767px
+       - Tablet  : 768px – 1023px
+       - Desktop : 1024px+
+============================================== */
+
+
+/* -----------------------------------------------
+   0. CSS CUSTOM PROPERTIES (VARIABLES)
+   Define once here, reuse everywhere.
+   To change the theme, only edit this section.
+----------------------------------------------- */
+:root {
+  /* Brand Colors (as per brief) */
+  --color-primary:    #0066CC;    /* main blue – buttons, links, accents */
+  --color-secondary:  #00AEEF;    /* light blue – gradients, highlights   */
+  --color-bg:         #F5F9FF;    /* soft page background                 */
+  --color-text:       #333333;    /* default body text                    */
+  --color-white:      #FFFFFF;
+  --color-light:      #EEF4FB;    /* alternate section background         */
+  --color-border:     #D0E4F5;    /* input borders, dividers              */
+  --color-muted:      #6B7E99;    /* secondary text                       */
+  --color-success:    #1BA354;    /* Completed badge                      */
+  --color-warning:    #D97706;    /* Pending badge                        */
+  --color-danger:     #DC2626;    /* Cancelled badge                      */
+
+  /* Spacing */
+  --spacing-xs:  0.4rem;
+  --spacing-sm:  0.75rem;
+  --spacing-md:  1.25rem;
+  --spacing-lg:  2rem;
+  --spacing-xl:  3.5rem;
+  --spacing-xxl: 5rem;
+
+  /* Border radius */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0, 102, 204, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 102, 204, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 102, 204, 0.18);
+
+  /* Transitions */
+  --transition: 0.25s ease;
+
+  /* Font */
+  --font-family: Arial, Helvetica, sans-serif;
+
+  /* Section padding */
+  --section-pad: 5rem 0;
+}
+
+
+/* -----------------------------------------------
+   1. CSS RESET & BASE STYLES
+   Normalize browser inconsistencies.
+----------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;  /* padding/border included in element width */
+  margin:     0;
+  padding:    0;
+}
+
+html {
+  scroll-behavior: smooth;  /* smooth anchor scrolling */
+  font-size: 16px;
+}
+
+body {
+  font-family:      var(--font-family);
+  background-color: var(--color-bg);
+  color:            var(--color-text);
+  line-height:      1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display:   block;
+}
+
+a {
+  color:           var(--color-primary);
+  text-decoration: none;
+  transition:      color var(--transition);
+}
+
+a:hover { color: var(--color-secondary); }
+
+ul { list-style: none; }
+
+address { font-style: normal; }
+
+
+/* -----------------------------------------------
+   2. REUSABLE UTILITY CLASSES
+----------------------------------------------- */
+
+/* Container: centers content, limits max-width */
+.container {
+  width:     100%;
+  max-width: 1200px;
+  margin:    0 auto;
+  padding:   0 var(--spacing-lg);
+}
+
+/* Alternating section background */
+.bg-light { background-color: var(--color-light); }
+
+/* Standard section padding */
+.section-pad { padding: var(--section-pad); }
+
+/* Section label (eyebrow text above the heading) */
+.section-label {
+  display:         inline-block;
+  font-size:       0.78rem;
+  font-weight:     700;
+  text-transform:  uppercase;
+  letter-spacing:  0.12em;
+  color:           var(--color-primary);
+  background:      rgba(0, 102, 204, 0.08);
+  border:          1px solid rgba(0, 102, 204, 0.2);
+  padding:         0.25rem 0.9rem;
+  border-radius:   var(--radius-full);
+  margin-bottom:   var(--spacing-sm);
+}
+
+/* Section title */
+.section-title {
+  font-size:   2rem;
+  font-weight: 800;
+  color:       var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height:   1.25;
+}
+
+/* Section subtitle */
+.section-subtitle {
+  font-size:     1rem;
+  color:         var(--color-muted);
+  max-width:     600px;
+  margin-bottom: var(--spacing-xl);
+}
+
+
+/* -----------------------------------------------
+   3. TYPOGRAPHY SCALE
+----------------------------------------------- */
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem);  }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1rem;   }
+
+p  { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+small { font-size: 0.8rem; color: var(--color-muted); }
+
+
+/* -----------------------------------------------
+   4. BUTTONS
+   Two variants: primary (filled) and outline
+----------------------------------------------- */
+.btn {
+  display:         inline-block;
+  padding:         0.65rem 1.6rem;
+  border-radius:   var(--radius-full);
+  font-size:       0.9rem;
+  font-weight:     700;
+  cursor:          pointer;
+  transition:      background var(--transition), color var(--transition),
+                   transform var(--transition), box-shadow var(--transition);
+  border:          2px solid transparent;
+  text-align:      center;
+  white-space:     nowrap;
+}
+
+/* Filled primary button */
+.btn-primary {
+  background-color: var(--color-primary);
+  color:            var(--color-white);
+  border-color:     var(--color-primary);
+}
+.btn-primary:hover {
+  background-color: #004fa3;
+  border-color:     #004fa3;
+  color:            var(--color-white);
+  transform:        translateY(-2px);
+  box-shadow:       var(--shadow-md);
+}
+
+/* Outline button */
+.btn-outline {
+  background-color: transparent;
+  color:            var(--color-primary);
+  border-color:     var(--color-primary);
+}
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color:            var(--color-white);
+  transform:        translateY(-2px);
+}
+
+/* Small button variant (used on doctor cards) */
+.btn-sm {
+  padding:   0.45rem 1rem;
+  font-size: 0.82rem;
+}
+
+/* Large button variant (form submit) */
+.btn-large {
+  padding:   0.85rem 2.2rem;
+  font-size: 1rem;
+}
+
+
+/* -----------------------------------------------
+   5. HEADER & NAVIGATION
+   CSS: Flexbox for logo + nav + badge layout
+----------------------------------------------- */
+.header {
+  position:         sticky;  /* sticks to top on scroll */
+  top:              0;
+  z-index:          1000;
+  background-color: var(--color-white);
+  box-shadow:       0 2px 12px rgba(0, 102, 204, 0.1);
+  border-bottom:    1px solid var(--color-border);
+}
+
+.header-inner {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             var(--spacing-md);
+  padding-top:     0.85rem;
+  padding-bottom:  0.85rem;
+}
+
+/* ── Logo area ── */
+.logo-area {
+  display:     flex;
+  align-items: center;
+  gap:         0.65rem;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display:        flex;
+  flex-direction: column;
+  line-height:    1.2;
+}
+
+.logo-main {
+  font-size:   1.4rem;
+  font-weight: 900;
+  color:       var(--color-primary);
+  letter-spacing: -0.02em;
+}
+
+.logo-sub {
+  font-size:  0.72rem;
+  color:      var(--color-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Navigation ── */
+.nav-list {
+  display:     flex;
+  align-items: center;
+  gap:         0.15rem;
+  flex-wrap:   wrap;
+}
+
+.nav-link {
+  display:       block;
+  padding:       0.45rem 0.9rem;
+  font-size:     0.88rem;
+  font-weight:   600;
+  color:         var(--color-text);
+  border-radius: var(--radius-sm);
+  transition:    background var(--transition), color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: rgba(0, 102, 204, 0.08);
+  color:            var(--color-primary);
+}
+
+/* ── Emergency badge ── */
+.header-badge {
+  display:         flex;
+  align-items:     center;
+  gap:             0.4rem;
+  font-size:       0.82rem;
+  color:           var(--color-muted);
+  white-space:     nowrap;
+  flex-shrink:     0;
+}
+
+.badge-dot {
+  width:            8px;
+  height:           8px;
+  border-radius:    50%;
+  background-color: #22c55e;
+  /* pulsing green dot to indicate live/available */
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+
+/* -----------------------------------------------
+   6. HERO SECTION
+   CSS: CSS Grid – text left, card right
+   Background: deep blue gradient
+----------------------------------------------- */
+.hero {
+  position:   relative;
+  background: linear-gradient(135deg, #003d7a 0%, #0066CC 50%, #0099e6 100%);
+  color:      var(--color-white);
+  overflow:   hidden;
+  padding:    5rem 0 4rem;
+  min-height: 88vh;
+  display:    flex;
+  align-items: center;
+}
+
+/* Semi-transparent overlay pattern for depth */
+.hero-overlay {
+  position:   absolute;
+  inset:      0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='5' cy='5' r='1.5' fill='rgba(255,255,255,0.06)'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.hero-content {
+  display:               grid;
+  grid-template-columns: 1fr 420px;
+  gap:                   var(--spacing-xl);
+  align-items:           center;
+  position:              relative;
+  z-index:               1;
+}
+
+/* ── Hero text ── */
+.hero-eyebrow {
+  font-size:     0.82rem;
+  font-weight:   700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color:          rgba(255,255,255,0.75);
+  margin-bottom:  var(--spacing-sm);
+}
+
+.hero-heading {
+  font-size:   clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.12;
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-accent {
+  color: #7dd3fc;   /* sky blue accent on dark hero */
+}
+
+.hero-desc {
+  font-size:   1.05rem;
+  color:       rgba(255,255,255,0.85);
+  max-width:   520px;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Hero stats row */
+.hero-stats {
+  display:       flex;
+  gap:           var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stat {
+  display:        flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-size:   1.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color:     rgba(255,255,255,0.65);
+  margin-top: 0.2rem;
+}
+
+/* CTA buttons row */
+.hero-buttons {
+  display:     flex;
+  gap:         var(--spacing-sm);
+  flex-wrap:   wrap;
+}
+
+/* Override outline button colors for dark background */
+.hero .btn-outline {
+  color:        var(--color-white);
+  border-color: rgba(255,255,255,0.6);
+}
+.hero .btn-outline:hover {
+  background-color: var(--color-white);
+  color:            var(--color-primary);
+  border-color:     var(--color-white);
+}
+
+/* ── Hero floating card ── */
+.hero-card-wrap {
+  perspective: 800px;
+}
+
+.hero-card {
+  background:    rgba(255,255,255,0.12);
+  border:        1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding:       2rem;
+  color:         var(--color-white);
+  transform:     rotateY(-4deg) rotateX(2deg);
+  box-shadow:    0 20px 60px rgba(0,0,0,0.3);
+}
+
+.hero-card-icon {
+  font-size:     2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.hero-card h3 {
+  font-size:     1.3rem;
+  font-weight:   800;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card p {
+  color:     rgba(255,255,255,0.75);
+  font-size: 0.9rem;
+}
+
+.hero-card-divider {
+  border:        none;
+  border-top:    1px solid rgba(255,255,255,0.2);
+  margin:        1.2rem 0;
+}
+
+.hero-card-row {
+  display:         flex;
+  justify-content: space-between;
+  font-size:       0.88rem;
+  font-weight:     600;
+}
+
+
+/* -----------------------------------------------
+   7. ABOUT SECTION
+   CSS: 3-column grid of cards
+----------------------------------------------- */
+.about-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   var(--spacing-lg);
+}
+
+.about-card {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       2rem 1.75rem;
+  transition:    transform var(--transition), box-shadow var(--transition);
+}
+
+.about-card:hover {
+  transform:  translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Featured middle card has blue background */
+.about-card--featured {
+  background:   var(--color-primary);
+  color:        var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.about-card--featured h3 { color: var(--color-white); }
+.about-card--featured p  { color: rgba(255,255,255,0.85); }
+
+.about-icon {
+  font-size:     2.2rem;
+  margin-bottom: 1rem;
+}
+
+.about-card h3 {
+  font-size:     1.15rem;
+  font-weight:   800;
+  margin-bottom: 0.65rem;
+  color:         var(--color-text);
+}
+
+/* Values list inside about card */
+.values-list {
+  list-style: none;
+  padding:    0;
+}
+
+.values-list li {
+  padding:       0.3rem 0;
+  padding-left:  1.2rem;
+  position:      relative;
+  font-size:     0.9rem;
+}
+
+.values-list li::before {
+  content:  "✓";
+  position: absolute;
+  left:     0;
+  color:    var(--color-primary);
+  font-weight: 700;
+}
+
+.about-card--featured .values-list li::before {
+  color: #7dd3fc;
+}
+
+
+/* -----------------------------------------------
+   8. SERVICES SECTION
+   CSS: CSS Grid – 3 columns
+----------------------------------------------- */
+.services-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   var(--spacing-lg);
+}
+
+.service-card {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow:      hidden;
+  transition:    transform var(--transition), box-shadow var(--transition);
+}
+
+.service-card:hover {
+  transform:  translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Service image placeholder – each has a unique gradient */
+.service-img {
+  height:  180px;
+  width:   100%;
+}
+
+.service-img--checkup  { background: linear-gradient(135deg, #0066CC, #00AEEF); }
+.service-img--emergency{ background: linear-gradient(135deg, #DC2626, #f97316); }
+.service-img--dental   { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+.service-img--lab      { background: linear-gradient(135deg, #059669, #34d399); }
+.service-img--pharmacy { background: linear-gradient(135deg, #d97706, #fbbf24); }
+.service-img--pediatrics{ background: linear-gradient(135deg, #db2777, #f472b6); }
+
+/* Each image has an emoji icon centered */
+.service-img::after {
+  content:   attr(aria-label);
+  display:   block;
+  text-align:center;
+  padding-top: 60px;
+  font-size: 0.82rem;
+  color:     rgba(255,255,255,0.8);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.service-body {
+  padding: 1.5rem;
+}
+
+.service-body h3 {
+  font-size:     1.05rem;
+  font-weight:   800;
+  color:         var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.service-body p {
+  font-size: 0.88rem;
+  color:     var(--color-muted);
+}
+
+
+/* -----------------------------------------------
+   9. DOCTORS SECTION
+   CSS: Flexbox – row, wraps to next line
+----------------------------------------------- */
+.doctors-flex {
+  display:         flex;
+  flex-wrap:       wrap;       /* cards wrap to next row */
+  gap:             var(--spacing-lg);
+  justify-content: center;
+}
+
+.doctor-card {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow:      hidden;
+  width:         220px;
+  flex-shrink:   0;
+  transition:    transform var(--transition), box-shadow var(--transition);
+  text-align:    center;
+}
+
+.doctor-card:hover {
+  transform:  translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Doctor photo placeholder with initials */
+.doctor-photo {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--color-white);
+}
+
+/* Each doctor gets a unique avatar background */
+.doctor-photo--1 { background: linear-gradient(135deg, #0066CC, #00AEEF); }
+.doctor-photo--1::after { content: "AS"; }
+
+.doctor-photo--2 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+.doctor-photo--2::after { content: "RT"; }
+
+.doctor-photo--3 { background: linear-gradient(135deg, #db2777, #f472b6); }
+.doctor-photo--3::after { content: "PR"; }
+
+.doctor-photo--4 { background: linear-gradient(135deg, #059669, #34d399); }
+.doctor-photo--4::after { content: "SA"; }
+
+.doctor-photo--5 { background: linear-gradient(135deg, #d97706, #fbbf24); }
+.doctor-photo--5::after { content: "MB"; }
+
+.doctor-info {
+  padding: 1.25rem 1rem;
+}
+
+.doctor-info h3 {
+  font-size:     1rem;
+  font-weight:   800;
+  margin-bottom: 0.25rem;
+}
+
+.doctor-qual {
+  font-size:     0.8rem;
+  color:         var(--color-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Department tag pill */
+.doctor-dept {
+  display:          inline-block;
+  background-color: rgba(0, 102, 204, 0.1);
+  color:            var(--color-primary);
+  padding:          0.2rem 0.8rem;
+  border-radius:    var(--radius-full);
+  font-size:        0.75rem;
+  font-weight:      700;
+  margin-bottom:    1rem;
+}
+
+.doctor-info .btn {
+  width: 100%;
+}
+
+
+/* -----------------------------------------------
+   10. DEPARTMENTS SECTION
+   Unordered list – CSS Grid layout
+----------------------------------------------- */
+.dept-grid {
+  display:               grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:                   var(--spacing-md);
+}
+
+.dept-item {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       1.25rem;
+  display:       flex;
+  align-items:   center;
+  gap:           0.75rem;
+  font-weight:   700;
+  font-size:     0.92rem;
+  transition:    background var(--transition), border-color var(--transition);
+  cursor:        default;
+}
+
+.dept-item:hover {
+  background-color: var(--color-primary);
+  border-color:     var(--color-primary);
+  color:            var(--color-white);
+}
+
+.dept-icon {
+  font-size: 1.5rem;
+}
+
+
+/* -----------------------------------------------
+   11. APPOINTMENT FORM
+   Fieldsets, labels, inputs, select, textarea,
+   radio buttons, validation pseudo-classes
+----------------------------------------------- */
+.appt-form {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       2.5rem;
+  box-shadow:    var(--shadow-sm);
+}
+
+/* Fieldset (groups related fields visually) */
+.form-section {
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       1.5rem 1.75rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Legend: the fieldset label */
+.form-section legend {
+  font-size:   1rem;
+  font-weight: 800;
+  color:       var(--color-primary);
+  padding:     0 0.5rem;
+}
+
+/* Two-column row inside the form */
+.form-row {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   var(--spacing-md);
+  margin-bottom:         var(--spacing-md);
+}
+
+/* Individual field wrapper */
+.form-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            0.4rem;
+}
+
+/* Full-width field (spans both columns) */
+.form-group--full {
+  grid-column: 1 / -1;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Label */
+.form-group label {
+  font-size:   0.85rem;
+  font-weight: 700;
+  color:       var(--color-text);
+}
+
+/* Required asterisk */
+.req { color: var(--color-danger); }
+
+/* All form controls share these styles */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding:       0.65rem 1rem;
+  border:        1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size:     0.9rem;
+  font-family:   var(--font-family);
+  color:         var(--color-text);
+  background:    var(--color-bg);
+  transition:    border-color var(--transition), box-shadow var(--transition);
+  width:         100%;
+}
+
+/* Focus state: blue border + glow */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline:      none;
+  border-color: var(--color-primary);
+  box-shadow:   0 0 0 3px rgba(0, 102, 204, 0.15);
+  background:   var(--color-white);
+}
+
+/* HTML5 validation – valid = green, invalid = red */
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: var(--color-success);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: var(--color-danger);
+}
+
+.form-group textarea { resize: vertical; min-height: 110px; }
+
+/* Radio button group */
+.radio-group {
+  display:   flex;
+  gap:       1.5rem;
+  flex-wrap: wrap;
+}
+
+.radio-label {
+  display:     flex;
+  align-items: center;
+  gap:         0.4rem;
+  cursor:      pointer;
+  font-size:   0.9rem;
+}
+
+.radio-label input[type="radio"] {
+  width:  18px;
+  height: 18px;
+  accent-color: var(--color-primary);  /* colors the radio button blue */
+  cursor: pointer;
+}
+
+/* Submit + reset buttons row */
+.form-submit {
+  display:         flex;
+  gap:             var(--spacing-sm);
+  justify-content: flex-end;
+  flex-wrap:       wrap;
+}
+
+
+/* -----------------------------------------------
+   12. PATIENT RECORDS TABLE
+   Semantic HTML table with status badges
+----------------------------------------------- */
+
+/* Horizontal scroll container for mobile */
+.table-wrap {
+  overflow-x: auto;
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow:    var(--shadow-sm);
+}
+
+.records-table {
+  width:           100%;
+  border-collapse: collapse;   /* removes default cell spacing */
+  background:      var(--color-white);
+  font-size:       0.88rem;
+}
+
+/* Caption (table title) */
+.records-table caption {
+  caption-side:  top;
+  text-align:    left;
+  padding:       1rem 1.25rem;
+  font-weight:   800;
+  font-size:     1rem;
+  color:         var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Header cells */
+.records-table thead th {
+  background-color: var(--color-primary);
+  color:            var(--color-white);
+  padding:          0.85rem 1rem;
+  text-align:       left;
+  font-size:        0.82rem;
+  text-transform:   uppercase;
+  letter-spacing:   0.06em;
+  white-space:      nowrap;
+}
+
+/* Body cells */
+.records-table tbody td {
+  padding:      0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  color:        var(--color-text);
+  white-space:  nowrap;
+}
+
+/* Zebra striping: alternate row colors for readability */
+.records-table tbody tr:nth-child(even) {
+  background-color: #f0f6ff;
+}
+
+/* Row hover highlight */
+.records-table tbody tr:hover {
+  background-color: rgba(0, 174, 239, 0.08);
+}
+
+/* Status badge pills */
+.badge {
+  display:       inline-block;
+  padding:       0.22rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size:     0.75rem;
+  font-weight:   700;
+}
+
+.badge--done    { background: #dcfce7; color: var(--color-success); }
+.badge--pending { background: #fef9c3; color: var(--color-warning); }
+.badge--cancel  { background: #fee2e2; color: var(--color-danger);  }
+
+
+/* -----------------------------------------------
+   13. TESTIMONIALS SECTION
+   3 cards with blockquote, figcaption, stars
+----------------------------------------------- */
+.testi-grid {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   var(--spacing-lg);
+  align-items:           stretch;
+}
+
+.testi-card {
+  background:    var(--color-white);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       2rem;
+  position:      relative;
+  transition:    transform var(--transition), box-shadow var(--transition);
+  display:       flex;
+  flex-direction: column;
+  gap:           1rem;
+}
+
+.testi-card:hover {
+  transform:  translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Featured center card */
+.testi-card--featured {
+  background:   var(--color-primary);
+  color:        var(--color-white);
+  border-color: var(--color-primary);
+  transform:    translateY(-8px);
+  box-shadow:   var(--shadow-lg);
+}
+
+/* Decorative opening quote */
+.testi-card blockquote::before {
+  content:   "\201C";   /* Unicode opening double quote */
+  font-size: 4rem;
+  color:     rgba(0, 102, 204, 0.15);
+  line-height: 0;
+  position:  relative;
+  top:       0.6rem;
+  display:   block;
+}
+
+.testi-card--featured blockquote::before {
+  color: rgba(255,255,255,0.2);
+}
+
+.testi-card blockquote {
+  font-size:   0.95rem;
+  line-height: 1.7;
+  color:       var(--color-text);
+  flex-grow:   1;
+}
+
+.testi-card--featured blockquote { color: rgba(255,255,255,0.9); }
+
+/* Author row (avatar + name + role) */
+.testi-card figcaption {
+  display:     flex;
+  align-items: center;
+  gap:         0.8rem;
+}
+
+/* Avatar circle with initials */
+.testi-avatar {
+  width:         44px;
+  height:        44px;
+  border-radius: 50%;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  font-size:     0.85rem;
+  font-weight:   900;
+  color:         var(--color-white);
+  flex-shrink:   0;
+}
+
+.testi-avatar--a { background: linear-gradient(135deg, #0066CC, #00AEEF); }
+.testi-avatar--b { background: linear-gradient(135deg, #db2777, #f472b6); }
+.testi-avatar--c { background: linear-gradient(135deg, #059669, #34d399); }
+
+.testi-card figcaption strong {
+  display:     block;
+  font-size:   0.92rem;
+  color:       var(--color-text);
+}
+
+.testi-card--featured figcaption strong { color: var(--color-white); }
+
+.testi-card figcaption span {
+  font-size:  0.78rem;
+  color:      var(--color-muted);
+}
+
+.testi-card--featured figcaption span { color: rgba(255,255,255,0.65); }
+
+.testi-stars {
+  font-size: 1.1rem;
+  color:     #f59e0b;   /* gold star color */
+  letter-spacing: 0.05em;
+}
+
+
+/* -----------------------------------------------
+   14. CONTACT SECTION
+   Two-column: details left, map right
+----------------------------------------------- */
+.contact-layout {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   var(--spacing-xl);
+  align-items:           start;
+}
+
+.contact-item {
+  display:       flex;
+  gap:           var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  align-items:   flex-start;
+}
+
+.contact-icon {
+  font-size:   1.6rem;
+  flex-shrink: 0;
+  margin-top:  0.1rem;
+}
+
+.contact-item strong {
+  display:       block;
+  font-size:     0.9rem;
+  font-weight:   800;
+  color:         var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.contact-item p {
+  font-size: 0.88rem;
+  color:     var(--color-muted);
+  line-height: 1.8;
+}
+
+.contact-item a {
+  color:           var(--color-primary);
+  text-decoration: underline;
+}
+
+/* Map placeholder: styled div mimicking an embedded map */
+.map-wrap {
+  border-radius: var(--radius-md);
+  overflow:      hidden;
+  box-shadow:    var(--shadow-md);
+}
+
+.map-placeholder {
+  background:    linear-gradient(135deg, #e0eeff 0%, #bfdfff 100%);
+  height:        360px;
+  display:       flex;
+  flex-direction: column;
+  align-items:   center;
+  justify-content: center;
+  text-align:    center;
+  gap:           0.75rem;
+  border:        1px dashed var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.map-pin { font-size: 3rem; }
+
+.map-placeholder p {
+  font-size: 0.9rem;
+  color:     var(--color-muted);
+  margin:    0;
+}
+
+.map-placeholder strong {
+  font-size: 1rem;
+  color:     var(--color-text);
+}
+
+
+/* -----------------------------------------------
+   15. FOOTER
+   CSS: CSS Grid – 4 columns
+----------------------------------------------- */
+.footer {
+  background-color: #0a1c34;  /* very dark navy */
+  color:            rgba(255,255,255,0.8);
+  padding-top:      var(--spacing-xxl);
+}
+
+.footer-grid {
+  display:               grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap:                   var(--spacing-xl);
+  padding-bottom:        var(--spacing-xl);
+}
+
+/* Footer brand column */
+.footer-logo {
+  display:       flex;
+  align-items:   center;
+  gap:           0.65rem;
+  margin-bottom: 1rem;
+  font-size:     1.3rem;
+  font-weight:   900;
+  color:         var(--color-white);
+}
+
+.footer-about {
+  font-size:     0.88rem;
+  color:         rgba(255,255,255,0.65);
+  line-height:   1.8;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap:     0.5rem;
+}
+
+.social-link {
+  width:           36px;
+  height:          36px;
+  border-radius:   50%;
+  background:      rgba(255,255,255,0.1);
+  border:          1px solid rgba(255,255,255,0.15);
+  color:           var(--color-white);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       0.85rem;
+  font-weight:     800;
+  transition:      background var(--transition);
+}
+
+.social-link:hover {
+  background: var(--color-primary);
+  color:      var(--color-white);
+}
+
+/* Footer column headings */
+.footer-heading {
+  font-size:     0.85rem;
+  font-weight:   800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color:         var(--color-white);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Footer link lists */
+.footer-list {
+  display:        flex;
+  flex-direction: column;
+  gap:            0.5rem;
+}
+
+.footer-list a {
+  font-size:   0.88rem;
+  color:       rgba(255,255,255,0.65);
+  transition:  color var(--transition);
+}
+
+.footer-list a:hover {
+  color: var(--color-secondary);
+}
+
+/* Footer contact address */
+.footer-contact p {
+  font-size:     0.88rem;
+  color:         rgba(255,255,255,0.65);
+  margin-bottom: 0.5rem;
+}
+
+/* Bottom copyright bar */
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding:    1.25rem 0;
+}
+
+.footer-bottom-inner {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  flex-wrap:       wrap;
+  gap:             0.5rem;
+}
+
+.footer-bottom p {
+  font-size: 0.82rem;
+  color:     rgba(255,255,255,0.45);
+  margin:    0;
+}
+
+.footer-bottom a {
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-bottom a:hover {
+  color: var(--color-secondary);
+}
+
+
+/* ==============================================
+   16. RESPONSIVE DESIGN – MEDIA QUERIES
+
+   Breakpoints:
+   - Mobile  (max 767px)   : single-column, stacked
+   - Tablet  (768–1023px)  : 2-column grids
+   - Desktop (1024px+)     : full multi-column layout (default above)
+============================================== */
+
+
+/* ─── TABLET: 768px – 1023px ─── */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* Navigation wraps to 2 lines */
+  .header-inner {
+    flex-wrap: wrap;
+    gap:       0.5rem;
+  }
+
+  .header-badge { display: none; }
+
+  /* Hero becomes single column */
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-card-wrap { display: none; }  /* hide the 3D card on tablet */
+
+  .hero-stats, .hero-buttons { justify-content: center; }
+
+  /* About: 2 columns then 1 */
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Services: 2 columns */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Departments: 3 columns */
+  .dept-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Testimonials: 2 then stack 1 */
+  .testi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testi-card--featured { transform: none; }
+
+  /* Contact: stack */
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer: 2 columns */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ─── MOBILE: up to 767px ─── */
+@media (max-width: 767px) {
+
+  /* ── Variables override for tighter spacing on mobile ── */
+  :root {
+    --section-pad: 3rem 0;
+    --spacing-xl:  2rem;
+    --spacing-xxl: 3rem;
+  }
+
+  /* ── Header ── */
+  .header-inner {
+    flex-direction: column;
+    align-items:    flex-start;
+    gap:            0.75rem;
+    padding-top:    0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .header-badge { display: none; }
+
+  /* Nav scrolls horizontally if links don't fit */
+  .nav-list {
+    overflow-x:  auto;
+    gap:         0.1rem;
+    flex-wrap:   nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  .nav-link {
+    font-size:   0.8rem;
+    padding:     0.35rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding:    3rem 0;
+    min-height: auto;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-card-wrap { display: none; }
+
+  .hero-stats {
+    justify-content: center;
+    gap: var(--spacing-lg);
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-direction:  column;
+    align-items:     center;
+  }
+
+  .hero-desc { font-size: 0.95rem; }
+
+  /* ── Section titles ── */
+  .section-title    { font-size: 1.5rem; }
+  .section-subtitle { font-size: 0.9rem; }
+
+  /* ── About ── */
+  .about-grid { grid-template-columns: 1fr; }
+
+  /* ── Services ── */
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* ── Doctors flex wraps to single column ── */
+  .doctor-card { width: 100%; }
+
+  /* ── Departments ── */
+  .dept-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Form ── */
+  .appt-form {
+    padding: 1.25rem;
+  }
+
+  /* Form rows become single column on mobile */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-submit {
+    flex-direction: column;
+  }
+
+  .form-submit .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ── Table ── */
+  .records-table {
+    font-size: 0.8rem;
+  }
+
+  .records-table thead th,
+  .records-table tbody td {
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* ── Testimonials ── */
+  .testi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testi-card--featured { transform: none; }
+
+  /* ── Contact ── */
+  .contact-layout { grid-template-columns: 1fr; }
+
+  .map-placeholder { height: 260px; }
+
+  /* ── Footer ── */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align:     center;
+  }
+}
+
+
+/* ─── SMALL MOBILE: up to 479px ─── */
+@media (max-width: 479px) {
+  .hero-stats { flex-direction: column; align-items: center; gap: 1rem; }
+  .dept-grid  { grid-template-columns: 1fr; }
+  .radio-group { flex-direction: column; gap: 0.5rem; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       1. HEADER SECTION
+       Contains: logo, clinic name, navigation menu
+       CSS: Flexbox for horizontal layout
+  ============================================= -->
+  <header class="header" id="home">
+    <div class="header-inner container">
+
+      <!-- Logo + Clinic Name -->
+      <div class="logo-area">
+        <!-- Using an inline SVG as the logo so no external image is needed -->
+        <div class="logo-icon" aria-label="MediCare Logo">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="21" cy="21" r="21" fill="#0066CC"/>
+            <rect x="18" y="10" width="6" height="22" rx="3" fill="white"/>
+            <rect x="10" y="18" width="22" height="6" rx="3" fill="white"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-main">MediCare</span>
+          <span class="logo-sub">Clinic &amp; Hospital</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu (Semantic nav tag) -->
+      <nav class="nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#home"        class="nav-link active">Home</a></li>
+          <li><a href="#about"       class="nav-link">About</a></li>
+          <li><a href="#services"    class="nav-link">Services</a></li>
+          <li><a href="#doctors"     class="nav-link">Doctors</a></li>
+          <li><a href="#departments" class="nav-link">Departments</a></li>
+          <li><a href="#appointment" class="nav-link">Appointment</a></li>
+          <li><a href="#contact"     class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Emergency badge -->
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        Emergency: <strong>+977-025-411111</strong>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =============================================
+       2. HERO SECTION
+       Large banner with heading and CTA buttons
+       CSS: CSS Grid for two-column layout
+  ============================================= -->
+  <section class="hero" aria-label="Hero Banner">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+
+      <!-- Left: text content -->
+      <div class="hero-text">
+        <p class="hero-eyebrow">Trusted Healthcare Since 2005</p>
+        <h1 class="hero-heading">Your Health,<br><span class="hero-accent">Our Priority</span></h1>
+        <p class="hero-desc">
+          Advanced medical care with compassion. Our team of 50+ specialists is available
+          24/7 to provide world-class treatment right here in Itahari, Sunsari.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">12,000+</span>
+            <span class="stat-label">Patients Served</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Specialists</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">18</span>
+            <span class="stat-label">Departments</span>
+          </div>
+        </div>
+        <div class="hero-buttons">
+          <a href="#appointment" class="btn btn-primary">Book Appointment</a>
+          <a href="#contact"     class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+
+      <!-- Right: decorative card -->
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="hero-card-icon">🏥</div>
+          <h3>24/7 Emergency Care</h3>
+          <p>Our emergency unit never sleeps. Fully staffed and equipped around the clock.</p>
+          <hr class="hero-card-divider">
+          <div class="hero-card-row">
+            <span>🩺 ICU Available</span>
+            <span>🚑 Ambulance</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       3. ABOUT CLINIC SECTION
+       Clinic introduction, Mission, Vision, Values
+       CSS: Flexbox for side-by-side layout
+  ============================================= -->
+  <section class="about section-pad" id="about">
+    <div class="container">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">Caring for Itahari Since 2005</h2>
+      <p class="section-subtitle">
+        MediCare Clinic began as a small general practice and has grown into one of
+        Sunsari's most trusted multi-specialty hospitals, combining modern technology
+        with heartfelt patient care.
+      </p>
+
+      <!-- Three cards: Mission / Vision / Values -->
+      <div class="about-grid">
+
+        <article class="about-card">
+          <div class="about-icon">🎯</div>
+          <h3>Our Mission</h3>
+          <p>
+            To deliver accessible, affordable, and high-quality healthcare to every
+            individual — treating each patient with dignity, respect, and professional
+            excellence.
+          </p>
+        </article>
+
+        <article class="about-card about-card--featured">
+          <div class="about-icon">🔭</div>
+          <h3>Our Vision</h3>
+          <p>
+            To become the leading healthcare institution in eastern Nepal, recognized
+            for clinical innovation, patient safety, and continuous improvement in
+            medical outcomes.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <div class="about-icon">💎</div>
+          <h3>Our Values</h3>
+          <ul class="values-list">
+            <li>Compassion &amp; Empathy</li>
+            <li>Clinical Excellence</li>
+            <li>Integrity &amp; Transparency</li>
+            <li>Teamwork &amp; Respect</li>
+            <li>Continuous Learning</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       4. SERVICES SECTION
+       6 services displayed with CSS Grid
+       Each: image placeholder, title, description
+  ============================================= -->
+  <section class="services section-pad bg-light" id="services">
+    <div class="container">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Our Medical Services</h2>
+      <p class="section-subtitle">
+        Comprehensive care under one roof — from routine checkups to complex surgeries.
+      </p>
+
+      <!-- CSS Grid: 3 columns on desktop, 2 on tablet, 1 on mobile -->
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-img service-img--checkup" role="img" aria-label="General Checkup"></div>
+          <div class="service-body">
+            <h3>General Checkup</h3>
+            <p>
+              Annual and routine health examinations with full blood work, vitals
+              assessment, and personalized health counseling by our physicians.
+            </p>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-img service-img--emergency" role="img" aria-label="Emergency Care"></div>
+          <div class="service-body">
+            <h3>Emergency Care</h3>
+            <p>
+              Round-the-clock emergency services with a dedicated trauma team,
+              resuscitation unit, and direct ICU admission pathway.
+            </p>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-img service-img--dental" role="img" aria-label="Dental Care"></div>
+          <div class="service-body">
+            <h3>Dental Care</h3>
+            <p>
+              Complete oral health services: cleanings, fillings, root canals,
+              orthodontics, and cosmetic dentistry with digital X-ray imaging.
+            </p>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-img service-img--lab" role="img" aria-label="Laboratory"></div>
+          <div class="service-body">
+            <h3>Laboratory</h3>
+            <p>
+              NABL-standard diagnostic lab offering 200+ tests — pathology,
+              microbiology, biochemistry — with same-day results for most panels.
+            </p>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-img service-img--pharmacy" role="img" aria-label="Pharmacy"></div>
+          <div class="service-body">
+            <h3>Pharmacy</h3>
+            <p>
+              On-site pharmacy stocking 5,000+ medications, operated by licensed
+              pharmacists offering drug counseling and generic alternatives.
+            </p>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-img service-img--pediatrics" role="img" aria-label="Pediatrics"></div>
+          <div class="service-body">
+            <h3>Pediatrics</h3>
+            <p>
+              Child-friendly environment with specialist pediatricians covering
+              newborn care, vaccinations, growth monitoring, and adolescent health.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       5. DOCTORS SECTION
+       Doctor cards using Flexbox
+       Minimum 4 doctors with photo, name, dept
+  ============================================= -->
+  <section class="doctors section-pad" id="doctors">
+    <div class="container">
+      <div class="section-label">Meet the Team</div>
+      <h2 class="section-title">Our Specialist Doctors</h2>
+      <p class="section-subtitle">
+        Experienced, board-certified physicians dedicated to providing
+        evidence-based, patient-centered care.
+      </p>
+
+      <!-- Flexbox row, wraps on smaller screens -->
+      <div class="doctors-flex">
+
+        <article class="doctor-card">
+          <div class="doctor-photo doctor-photo--1" role="img" aria-label="Dr. Anita Sharma photo"></div>
+          <div class="doctor-info">
+            <h3>Dr. Anita Sharma</h3>
+            <p class="doctor-qual">MBBS, MD (Cardiology)</p>
+            <span class="doctor-dept">Cardiology</span>
+            <a href="#appointment" class="btn btn-sm">Book Appointment</a>
+          </div>
+        </article>
+
+        <article class="doctor-card">
+          <div class="doctor-photo doctor-photo--2" role="img" aria-label="Dr. Rajan Thapa photo"></div>
+          <div class="doctor-info">
+            <h3>Dr. Rajan Thapa</h3>
+            <p class="doctor-qual">MBBS, MS (Neurology)</p>
+            <span class="doctor-dept">Neurology</span>
+            <a href="#appointment" class="btn btn-sm">Book Appointment</a>
+          </div>
+        </article>
+
+        <article class="doctor-card">
+          <div class="doctor-photo doctor-photo--3" role="img" aria-label="Dr. Priya Rai photo"></div>
+          <div class="doctor-info">
+            <h3>Dr. Priya Rai</h3>
+            <p class="doctor-qual">MBBS, MD (Pediatrics)</p>
+            <span class="doctor-dept">Pediatrics</span>
+            <a href="#appointment" class="btn btn-sm">Book Appointment</a>
+          </div>
+        </article>
+
+        <article class="doctor-card">
+          <div class="doctor-photo doctor-photo--4" role="img" aria-label="Dr. Suresh Adhikari photo"></div>
+          <div class="doctor-info">
+            <h3>Dr. Suresh Adhikari</h3>
+            <p class="doctor-qual">MBBS, MS (Orthopedics)</p>
+            <span class="doctor-dept">Orthopedics</span>
+            <a href="#appointment" class="btn btn-sm">Book Appointment</a>
+          </div>
+        </article>
+
+        <article class="doctor-card">
+          <div class="doctor-photo doctor-photo--5" role="img" aria-label="Dr. Meena Basnet photo"></div>
+          <div class="doctor-info">
+            <h3>Dr. Meena Basnet</h3>
+            <p class="doctor-qual">MBBS, MD (Dermatology)</p>
+            <span class="doctor-dept">Dermatology</span>
+            <a href="#appointment" class="btn btn-sm">Book Appointment</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       6. DEPARTMENTS SECTION
+       Unordered list of departments
+  ============================================= -->
+  <section class="departments section-pad bg-light" id="departments">
+    <div class="container">
+      <div class="section-label">Specialties</div>
+      <h2 class="section-title">Our Departments</h2>
+      <p class="section-subtitle">
+        18 specialized departments staffed with Nepal's finest medical professionals.
+      </p>
+
+      <ul class="dept-grid">
+        <li class="dept-item"><span class="dept-icon">❤️</span>Cardiology</li>
+        <li class="dept-item"><span class="dept-icon">🧠</span>Neurology</li>
+        <li class="dept-item"><span class="dept-icon">🦴</span>Orthopedics</li>
+        <li class="dept-item"><span class="dept-icon">👶</span>Pediatrics</li>
+        <li class="dept-item"><span class="dept-icon">🌿</span>Dermatology</li>
+        <li class="dept-item"><span class="dept-icon">🤰</span>Gynecology</li>
+        <li class="dept-item"><span class="dept-icon">🫁</span>Pulmonology</li>
+        <li class="dept-item"><span class="dept-icon">🦷</span>Dentistry</li>
+        <li class="dept-item"><span class="dept-icon">👁️</span>Ophthalmology</li>
+        <li class="dept-item"><span class="dept-icon">🩺</span>General Medicine</li>
+        <li class="dept-item"><span class="dept-icon">🔬</span>Oncology</li>
+        <li class="dept-item"><span class="dept-icon">🧪</span>Pathology &amp; Lab</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       7. APPOINTMENT REGISTRATION FORM
+       Full patient registration with validation
+       HTML Form elements: input, select, textarea,
+       radio buttons, required attributes, email/tel
+  ============================================= -->
+  <section class="appointment section-pad" id="appointment">
+    <div class="container">
+      <div class="section-label">Register</div>
+      <h2 class="section-title">Book an Appointment</h2>
+      <p class="section-subtitle">
+        Fill in the form below. Our reception team will confirm your slot within 2 hours.
+      </p>
+
+      <form class="appt-form" action="#" method="post" novalidate>
+
+        <!-- ── PATIENT INFORMATION ── -->
+        <fieldset class="form-section">
+          <legend>Patient Information</legend>
+
+          <div class="form-row">
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="fullname">Full Name <span class="req">*</span></label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="e.g. Rahul Shrestha"
+                required
+                minlength="3"
+              />
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="e.g. rahul@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="e.g. 9800000000"
+                pattern="[0-9]{10}"
+                required
+              />
+              <small>10-digit Nepal mobile number</small>
+            </div>
+            <!-- Date of Birth -->
+            <div class="form-group">
+              <label for="dob">Date of Birth <span class="req">*</span></label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                max="2010-01-01"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Gender (Radio Buttons) -->
+          <div class="form-group form-group--full">
+            <label>Gender <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="gender" value="male"   required /> Male
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="gender" value="female" /> Female
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="gender" value="other"  /> Other
+              </label>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="form-group form-group--full">
+            <label for="address">Address <span class="req">*</span></label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="e.g. Itahari-5, Sunsari, Province No.1"
+              required
+            />
+          </div>
+        </fieldset>
+
+        <!-- ── MEDICAL INFORMATION ── -->
+        <fieldset class="form-section">
+          <legend>Medical Information</legend>
+
+          <div class="form-row">
+            <!-- Blood Group -->
+            <div class="form-group">
+              <label for="blood">Blood Group <span class="req">*</span></label>
+              <select id="blood" name="blood" required>
+                <option value="">-- Select Blood Group --</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option>
+                <option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <!-- Department -->
+            <div class="form-group">
+              <label for="dept">Department <span class="req">*</span></label>
+              <select id="dept" name="dept" required>
+                <option value="">-- Select Department --</option>
+                <option>Cardiology</option>
+                <option>Neurology</option>
+                <option>Orthopedics</option>
+                <option>Pediatrics</option>
+                <option>Dermatology</option>
+                <option>Gynecology</option>
+                <option>General Medicine</option>
+                <option>Dentistry</option>
+                <option>Ophthalmology</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Doctor Selection -->
+          <div class="form-group form-group--full">
+            <label for="doctor">Preferred Doctor</label>
+            <select id="doctor" name="doctor">
+              <option value="">-- Select Doctor (Optional) --</option>
+              <option>Dr. Anita Sharma – Cardiology</option>
+              <option>Dr. Rajan Thapa – Neurology</option>
+              <option>Dr. Priya Rai – Pediatrics</option>
+              <option>Dr. Suresh Adhikari – Orthopedics</option>
+              <option>Dr. Meena Basnet – Dermatology</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- ── APPOINTMENT DETAILS ── -->
+        <fieldset class="form-section">
+          <legend>Appointment Details</legend>
+
+          <div class="form-row">
+            <!-- Date -->
+            <div class="form-group">
+              <label for="appt-date">Appointment Date <span class="req">*</span></label>
+              <input
+                type="date"
+                id="appt-date"
+                name="appt_date"
+                min="2025-01-01"
+                required
+              />
+            </div>
+            <!-- Time -->
+            <div class="form-group">
+              <label for="appt-time">Preferred Time <span class="req">*</span></label>
+              <select id="appt-time" name="appt_time" required>
+                <option value="">-- Select Time Slot --</option>
+                <option>08:00 AM – 09:00 AM</option>
+                <option>09:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 11:00 AM</option>
+                <option>11:00 AM – 12:00 PM</option>
+                <option>02:00 PM – 03:00 PM</option>
+                <option>03:00 PM – 04:00 PM</option>
+                <option>04:00 PM – 05:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Symptoms / Notes -->
+          <div class="form-group form-group--full">
+            <label for="symptoms">Describe Symptoms / Reason for Visit <span class="req">*</span></label>
+            <textarea
+              id="symptoms"
+              name="symptoms"
+              rows="4"
+              placeholder="Briefly describe your symptoms or reason for the visit..."
+              required
+              minlength="10"
+            ></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Submit -->
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary btn-large">
+            ✅ Confirm Appointment
+          </button>
+          <button type="reset" class="btn btn-outline">Clear Form</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       8. PATIENT RECORDS TABLE
+       Semantic HTML table with 10+ records
+       Responsive: horizontal scroll on mobile
+  ============================================= -->
+  <section class="records section-pad bg-light">
+    <div class="container">
+      <div class="section-label">Records</div>
+      <h2 class="section-title">Recent Patient Records</h2>
+      <p class="section-subtitle">
+        Sample appointment data — demonstrating the table structure used in the
+        clinic management dashboard.
+      </p>
+
+      <!-- Wrapper div enables horizontal scroll on small screens -->
+      <div class="table-wrap">
+        <table class="records-table">
+          <caption>Patient Appointment Records – June 2025</caption>
+          <thead>
+            <tr>
+              <th scope="col">Patient ID</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Doctor</th>
+              <th scope="col">Department</th>
+              <th scope="col">Appointment Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MC-001</td><td>Rahul Shrestha</td><td>Dr. Anita Sharma</td><td>Cardiology</td><td>2025-06-01</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-002</td><td>Sita Rai</td><td>Dr. Priya Rai</td><td>Pediatrics</td><td>2025-06-02</td>
+              <td><span class="badge badge--pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>MC-003</td><td>Bikash Thapa</td><td>Dr. Rajan Thapa</td><td>Neurology</td><td>2025-06-03</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-004</td><td>Kamala Gurung</td><td>Dr. Suresh Adhikari</td><td>Orthopedics</td><td>2025-06-04</td>
+              <td><span class="badge badge--cancel">Cancelled</span></td>
+            </tr>
+            <tr>
+              <td>MC-005</td><td>Dipak Limbu</td><td>Dr. Meena Basnet</td><td>Dermatology</td><td>2025-06-05</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-006</td><td>Anisha Koirala</td><td>Dr. Anita Sharma</td><td>Cardiology</td><td>2025-06-06</td>
+              <td><span class="badge badge--pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>MC-007</td><td>Roshan Yadav</td><td>Dr. Priya Rai</td><td>Pediatrics</td><td>2025-06-07</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-008</td><td>Sunita Karki</td><td>Dr. Rajan Thapa</td><td>Neurology</td><td>2025-06-08</td>
+              <td><span class="badge badge--pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>MC-009</td><td>Nabin Paudel</td><td>Dr. Suresh Adhikari</td><td>Orthopedics</td><td>2025-06-09</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-010</td><td>Gita Tamang</td><td>Dr. Meena Basnet</td><td>Dermatology</td><td>2025-06-10</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+            <tr>
+              <td>MC-011</td><td>Raj Kumar Shah</td><td>Dr. Anita Sharma</td><td>Cardiology</td><td>2025-06-11</td>
+              <td><span class="badge badge--cancel">Cancelled</span></td>
+            </tr>
+            <tr>
+              <td>MC-012</td><td>Puja Bhattarai</td><td>Dr. Priya Rai</td><td>Pediatrics</td><td>2025-06-12</td>
+              <td><span class="badge badge--done">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       9. TESTIMONIALS SECTION
+       3 patient reviews with blockquote
+  ============================================= -->
+  <section class="testimonials section-pad" id="testimonials">
+    <div class="container">
+      <div class="section-label">Patient Stories</div>
+      <h2 class="section-title">What Our Patients Say</h2>
+
+      <div class="testi-grid">
+
+        <figure class="testi-card">
+          <blockquote>
+            "The care I received at MediCare was outstanding. Dr. Sharma caught a
+            blocked artery that two other hospitals had missed. I am alive because
+            of this team."
+          </blockquote>
+          <figcaption>
+            <div class="testi-avatar testi-avatar--a">RS</div>
+            <div>
+              <strong>Ram Sundar KC</strong>
+              <span>Cardiology Patient</span>
+            </div>
+          </figcaption>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </figure>
+
+        <figure class="testi-card testi-card--featured">
+          <blockquote>
+            "My daughter had a severe fever at 2 AM. The pediatric team was awake,
+            calm, and professional. They stabilized her within the hour. I cannot
+            thank them enough."
+          </blockquote>
+          <figcaption>
+            <div class="testi-avatar testi-avatar--b">SP</div>
+            <div>
+              <strong>Sabita Pradhan</strong>
+              <span>Mother, Pediatrics</span>
+            </div>
+          </figcaption>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </figure>
+
+        <figure class="testi-card">
+          <blockquote>
+            "World-class orthopedic treatment right here in Itahari. Dr. Adhikari
+            performed my knee replacement and I was walking within three days.
+            Truly remarkable."
+          </blockquote>
+          <figcaption>
+            <div class="testi-avatar testi-avatar--c">BT</div>
+            <div>
+              <strong>Bir Bahadur Tamang</strong>
+              <span>Orthopedics Patient</span>
+            </div>
+          </figcaption>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       10. CONTACT SECTION
+       Address, phone, email, map placeholder
+  ============================================= -->
+  <section class="contact section-pad bg-light" id="contact">
+    <div class="container">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Find Us</h2>
+
+      <div class="contact-layout">
+
+        <!-- Contact details -->
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Address</strong>
+              <p>MediCare Clinic Pvt. Ltd.<br>
+                 Itahari-5, Sunsari<br>
+                 Province No. 1, Nepal – 56700</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <strong>Phone Numbers</strong>
+              <p>Reception: +977-025-411111<br>
+                 Emergency: +977-025-422222<br>
+                 Toll-free: 1800-200-300</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <p>
+                <a href="mailto:info@medicare.com.np">info@medicare.com.np</a><br>
+                <a href="mailto:appointments@medicare.com.np">appointments@medicare.com.np</a>
+              </p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div>
+              <strong>Working Hours</strong>
+              <p>OPD: Sun–Fri, 8:00 AM – 5:00 PM<br>
+                 Emergency: Open 24 / 7 / 365</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Map Placeholder -->
+        <div class="map-wrap" role="img" aria-label="Map showing MediCare Clinic location in Itahari">
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <p><strong>MediCare Clinic</strong></p>
+            <p>Itahari-5, Sunsari, Nepal</p>
+            <a
+              href="https://maps.google.com/?q=Itahari,Sunsari,Nepal"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >Open in Google Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       11. FOOTER SECTION
+       Quick Links, Services, Contact Info,
+       Social Media, Copyright
+       CSS: CSS Grid for multi-column layout
+  ============================================= -->
+  <footer class="footer">
+    <div class="container footer-grid">
+
+      <!-- Brand column -->
+      <div class="footer-col">
+        <div class="footer-logo">
+          <div class="logo-icon logo-icon--sm" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="21" cy="21" r="21" fill="#0066CC"/>
+              <rect x="18" y="10" width="6" height="22" rx="3" fill="white"/>
+              <rect x="10" y="18" width="22" height="6" rx="3" fill="white"/>
+            </svg>
+          </div>
+          <span>MediCare Clinic</span>
+        </div>
+        <p class="footer-about">
+          Providing trusted, compassionate healthcare to the Sunsari community
+          since 2005. NHRC-accredited. ISO 9001:2015 certified.
+        </p>
+        <!-- Social Media Links -->
+        <div class="social-links" aria-label="Social Media">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Twitter / X">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#doctors">Our Doctors</a></li>
+          <li><a href="#departments">Departments</a></li>
+          <li><a href="#appointment">Book Appointment</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Our Services</h4>
+        <ul class="footer-list">
+          <li><a href="#services">General Checkup</a></li>
+          <li><a href="#services">Emergency Care</a></li>
+          <li><a href="#services">Dental Care</a></li>
+          <li><a href="#services">Laboratory</a></li>
+          <li><a href="#services">Pharmacy</a></li>
+          <li><a href="#services">Pediatrics</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Contact Info</h4>
+        <address class="footer-contact">
+          <p>📍 Itahari-5, Sunsari, Nepal</p>
+          <p>📞 +977-025-411111</p>
+          <p>✉️ info@medicare.com.np</p>
+          <p>🕐 OPD: Sun–Fri 8 AM–5 PM</p>
+          <p>🚨 Emergency: 24/7</p>
+        </address>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2025 MediCare Clinic Pvt. Ltd. All rights reserved.</p>
+        <p>
+          <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
+          <a href="#">Terms of Service</a> &nbsp;|&nbsp;
+          <a href="#">Sitemap</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

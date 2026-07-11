@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<ul  id="dataList"></ul>
+    <script>
+        let datas = [
+    {
+        name: "Rahul",
+        role: "software developer",
+        address: "itahari"
+    },
+    {
+        name: "shyam",
+        role: "javascript developer",
+        address: "dharan"
+    }
+];
+
+function getDatas(datas) {
+   
+        setTimeout(() => {
+            let output = '';
+            
+            datas.forEach((data) => {
+                output += `<li>${data.name} - ${data.role} (${data.address})</li>`;
+            });
+
+            // If you want to display in HTML
+            const ul = document.getElementById('dataList'); // assuming you have <ul id="dataList"></ul>
+            if (ul) ul.innerHTML = output;
+
+            console.log('Data processed successfully');
+           // resolve with the generated HTML
+        }, 1000);
+    };
+
+    </script>
+
+
+</body>
+</html>
