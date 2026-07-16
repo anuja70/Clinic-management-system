@@ -66,3 +66,51 @@
  1 fetching data from apis 
  2 updating the document title or meta data
  3 controllig timers (settimeout/setinterval())
+
+ // Component Lifecycle 
+ Birth-life-Death
+ Mount(create)-update-Hide(Removed)
+ it is the series of the stage that a react component goes through from the time it is created until it is removed from the screen.
+ 1  Mounting 
+ Mounting is when a component is created and displayed on the screen for the first time
+ example 
+ function App(){
+   return 
+   (
+      <h1> hello React</h1>
+   )
+ }
+
+2 updating 
+it is the phase updating happens whenever state changes , props change and context changes
+
+3 unmounting 
+it means the component is removed from the screeen
+
+
+
+ // Api fetching
+   What is API?
+
+
+ //useContext
+it hepls to share data between components without passing props manually through every level or components (avoids "props drilling")
+
+App(usrname="Rahul")
+Navbar()
+Menu()
+Profiel()
+
+with contenxt 
+App----> Context ------> Any components
+Any component can access the shared data directly
+
+
+
+
+step 1   create user context
+step 2   create provider for avalibale the data inside
+step 3  creating consumer to consume the data
+
+ //useMemo
+ //useRef
