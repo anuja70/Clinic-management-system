@@ -244,3 +244,244 @@ export default App
 
 
   //assignmnet  todays /// fetch api use gareraa crud operation perform garne
+
+
+  // even handling using  onClick event
+
+
+  // import React from 'react'
+  
+  // const App = () => {
+  //   const handleClick = function(){
+  //     alert(" button clicked")
+
+  //   }
+
+  //   return (
+  //     <>
+  //     <button onClick={handleClick} >click me</button>
+        
+  //     </>
+  //   )
+  // }
+  
+  // export default App
+  
+
+
+  ///  onChange and onSubmit event
+
+
+//   import React, {useState} from 'react'
+  
+//   const App = () => {
+//     const [name, setName]= useState('')
+//     const [email, setEmail]= useState("")
+//     const [password,setPassword]=useState("")
+
+
+//     function handleSubmitform(e){
+//       e.preventDefault();// its don't want the page to reload in react applications
+//       alert("form successfully submitted!")
+
+
+//     }
+
+//     return (
+//       <>
+
+//       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+//   <form onSubmit={handleSubmitform} className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 space-y-5">
+
+//     <h2 className="text-3xl font-bold text-center text-gray-800">
+//       Register Form
+//     </h2>
+
+//     <div>
+//       <label className="block text-sm font-medium text-gray-700 mb-2">
+//         Full Name
+//       </label>
+//       <input
+//       onChange={(e)=> setName(e.target.value)}
+//         type="text"
+//         placeholder="Enter your name"
+//         value={name}
+//         className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+//       />
+//     </div>
+
+//     <div>
+//       <label className="block text-sm font-medium text-gray-700 mb-2">
+//         Email Address
+//       </label>
+//       <input
+//       onChange={(e)=> setEmail(e.target.value)}
+//         type="email"
+//         placeholder="Enter your email"
+//         value={email}
+//         className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+//       />
+//     </div>
+
+//     <div>
+//       <label className="block text-sm font-medium text-gray-700 mb-2">
+//         Password
+//       </label>
+//       <input
+//       onChange={(e)=> setPassword(e.target.value)}
+//         type="password"
+//         value={password}
+//         placeholder="Enter your password"
+//         className="w-full px-4 py-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+//       />
+//     </div>
+
+//     <button
+//       type="submit"
+//       className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
+//     >
+//       Submit Form
+//     </button>
+
+//   </form>
+  
+// </div>
+        
+//       </>
+//     )
+//   }
+  
+//   export default App
+
+
+
+import React, { useState } from 'react'
+import AppRoute from './routes/AppRoute'
+import { createProducts, deleteProduct, getProducts, updateProducts } from './services/productService'
+import ProductForm from './components/ProductForm'
+import ProductList from './components/ProductList'
+// import { Outlet } from 'react-router-dom'
+
+const App = () => {
+  const [products,setProducts]=useState([])
+  const [editingProduct, setEditingProduct]=useState(null)
+
+  const fetchProducts = async ()=>{
+      const response = await getProducts()
+      setProducts(response.data)
+    }
+
+    useEffect(()=>{
+      fetchProducts();
+    },[])
+
+
+
+    /// product add
+    const addProduct= async(product)=>{
+      await createProducts(product)
+      fetchProducts();
+    }
+
+    // update the existing product
+    const updateExisting=async (IdleDeadline,product)=>{
+      await updateProducts(id , product)
+      setEditingProduct(null)
+      fetchProducts()
+      
+    }
+
+    /// remove product
+
+    const removeProduct= async (id)=>{
+      await deleteProduct(id)
+      fetchProducts();
+    }
+  return (
+    <>
+    
+    <h1>product crud operation using axios</h1>
+    <ProductForm  addProduct={addProduct} editingProduct={editingProduct} updateProducts={updateExisting} />
+    <ProductList   products={products}  onDelete={removeProduct} onEdit={setEditingProduct} />
+
+
+    
+    {/* <AppRoute /> */}
+     
+      
+    </>
+  )
+}
+
+export default App
+
+
+
+
+  
+// import React, { useEffect } from 'react'
+// import axios from "axios"
+// // get requests
+
+
+// const App = () => {
+
+//   // get requests
+//   // axios.get("https://jsonplaceholder.typicode.com/posts")
+//   // .then(response)=>{
+//   //   console.log((response.data)
+//   // })
+//   // .catch(error)=>{
+//   //   console.log(error)
+//   // }
+//   // )
+
+//   useEffect(()=>{
+
+//     axios.get("https://jsonplaceholder.typicode.com/posts")
+//     .then((response)=>{
+//       console.log(response.data)
+
+//     })
+//     .catch((error)=>{
+//       console.log(error)
+//     })
+
+//   },[])
+//   // post method 
+//   axios.post("https://jsonplaceholder.typicode.com/posts",{
+//     title:"react",
+//     body:"axios exmaple peorfoming in react",
+//     userId:1
+//   })
+//   .then((response)=>{
+//     console.log(response.data)
+//   })
+
+//   ///put(update)
+
+//   axios.put("https://jsonplaceholder.typicode.com/posts/1",{
+//     title:"next js ",
+//     body:"axios exmaple peorfoming in  nextjs",
+//     userId:1
+//   })
+//   .then((response)=>{
+//     console.log(response.data)
+//   })
+
+//   axios.delete("https://jsonplaceholder.typicode.com/posts/1")
+//  .then((response)=>{
+//    console.log("deleted data")
+//  })
+
+
+//   return (
+//     <>
+//       // crud operation using axios
+//       <h1>didnt get data</h1>
+
+//     </>
+//   )
+// }
+
+// export default App
